@@ -1,18 +1,59 @@
 backend:
   name: git-gateway
-  branch: main # O master, dependiendo del nombre de tu rama principal en GitHub
+  branch: main
 
-media_folder: "images" # Dónde se subirán las nuevas imágenes
-public_folder: "/images" # Cómo se accederá a las imágenes desde la web
+media_folder: "images"
+public_folder: "images"
 
 collections:
-  - name: "paginas" # Nombre de la colección en el panel
-    label: "Páginas" # Etiqueta visible en el panel
+  - name: "configuracion_global"
+    label: "Configuración Global"
     files:
-      - file: "sobre-nosotros.html"
+      - file: "src/_data/sitio.json"
+        label: "Datos del Sitio"
+        name: "sitio"
+        fields:
+          - {label: "Email de Contacto", name: "email", widget: "string"}
+          - {label: "Teléfono de Contacto", name: "telefono", widget: "string"}
+          - {label: "Enlace Instagram", name: "instagram_url", widget: "string"}
+          - {label: "Enlace YouTube", name: "youtube_url", widget: "string"}
+      - file: "src/_data/testimonios.json"
+        label: "Testimonios"
+        name: "testimonios"
+        widget: "list"
+        fields:
+          - {label: "Autor", name: "autor", widget: "string"}
+          - {label: "Texto", name: "texto", widget: "text"}
+          - {label: "Tipo (Boda o Empresa)", name: "tipo", widget: "select", options: ["Boda", "Empresa"]}
+
+  - name: "paginas"
+    label: "Páginas"
+    files:
+      - file: "src/_data/homepage.json"
+        label: "Página de Inicio"
+        name: "homepage"
+        fields:
+          - {label: "Título Principal", name: "titulo", widget: "string"}
+          - {label: "Subtítulo", name: "subtitulo", widget: "string"}
+          - {label: "Texto de Introducción", name: "intro_texto", widget: "text"}
+      - file: "src/_data/sobre-nosotros.json"
         label: "Página 'Sobre Nosotros'"
         name: "sobre_nosotros"
         fields:
-          - {label: "Título Principal de la Página", name: "titulo", widget: "string"}
-          - {label: "Cuerpo de la Historia", name: "cuerpo", widget: "markdown"}
-          - {label: "Imagen de Perfil", name: "imagen", widget: "image"}
+          - {label: "Tu Nombre", name: "nombre", widget: "string"}
+          - {label: "Tu Cargo", name: "cargo", widget: "string"}
+          - {label: "Tu Historia", name: "historia", widget: "markdown"}
+          - {label: "Tu Cita o Frase", name: "cita", widget: "string"}
+          - {label: "Tu Foto de Perfil", name: "foto", widget: "image"}
+
+  - name: "cotizador"
+    label: "Servicios del Cotizador"
+    folder: "src/_data/servicios"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nombre del Servicio", name: "title", widget: "string"}
+      - {label: "Sección del Cotizador", name: "seccion", widget: "select", options: ["Bodas", "Quince Años", "Retratos", "Empresas", "Redes Sociales"]}
+      - {label: "Tipo de Selección", name: "tipo_seleccion", widget: "select", options: ["Paquete Principal (Radio)", "Adicional (Checkbox)"]}
+      - {label: "Descripción Corta", name: "descripcion", widget: "string"}
+      - {label: "Precio (solo números)", name: "precio", widget: "number"}
