@@ -1,32 +1,49 @@
 module.exports = function(eleventyConfig) {
   
-  // --- INSTRUCCIONES DE COPIADO (LA PARTE QUE FALTABA) ---
-  // Copia las carpetas completas de css, js, e images al sitio final.
+  // --- FILTRO PERSONALIZADO PARA EL COTIZADOR ---
+  // Esta función le enseña a Eleventy qué significa "filterby" para que el cotizador funcione.
+  eleventyConfig.addFilter("filterby", (collection, key, value) => {
+    if (!collection) {
+      return [];
+    }
+    return collection.filter(item => {
+      const data = item.data;
+      if (data && data[key] !== undefined) {
+        return data[key] === value;
+      }
+      return false;
+    });
+  });
+
+  // --- COLECCIÓN PERSONALIZADA PARA EL PORTAFOLIO ---
+  // Esta función le dice a Eleventy: "Crea una colección llamada 'portafolio' con todos los archivos que tengan la etiqueta 'portafolio'".
+  // Esto es necesario para que la página del portafolio pueda encontrar y mostrar las imágenes.
+  eleventyConfig.addCollection("portafolio", function(collectionApi) {
+    return collectionApi.getFilteredByTag("portafolio").sort((a, b) => {
+      return b.date - a.date; // Ordena las imágenes de la más nueva a la más antigua
+    });
+  });
+  
+  // --- COPIAR ARCHIVOS ESTÁTICOS ---
+  // Le dice a Eleventy que copie todas las carpetas y archivos necesarios al sitio final.
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/images");
-  
-  // Copia la carpeta de administración
   eleventyConfig.addPassthroughCopy("src/admin");
-
-  // Copia archivos individuales que están en la raíz de 'src'
+  eleventyConfig.addPassthroughCopy({"src/_redirects": "_redirects"});
   eleventyConfig.addPassthroughCopy("src/logo1.png");
   eleventyConfig.addPassthroughCopy("src/luisk.jpg");
   eleventyConfig.addPassthroughCopy("src/favicon.png");
-  
-  // Copia el archivo de redirecciones a la raíz del sitio final
-  eleventyConfig.addPassthroughCopy({"src/_redirects": "_redirects"});
 
+  // --- CONFIGURACIÓN DE DIRECTORIOS DE ELEVENTY ---
   return {
-    // --- CONFIGURACIÓN DE DIRECTORIOS ---
-    // Le dice a Eleventy dónde encontrar todo.
     dir: {
-      input: "src",          // Carpeta principal de trabajo
-      includes: "_includes", // Carpeta para plantillas
-      data: "_data",         // Carpeta para archivos de datos
-      output: "_site"        // Carpeta donde se genera el sitio
+      input: "src",
+      includes: "_includes",
+      data: "_data",
+      output: "_site"
     },
-    // Asegura que los archivos HTML se procesen como plantillas Nunjucks
-    htmlTemplateEngine: "njk"
+    htmlTemplateEngine: "njk",
+    markdownTemplateEngine: "njk"
   };
 };
