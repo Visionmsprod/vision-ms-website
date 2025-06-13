@@ -2,39 +2,12 @@
 layout: "base.njk"
 title: "Portafolio"
 description: "Explora nuestro portafolio de fotografía y video."
-pagination:
-  data: "collections.portafolio"
-  size: 100
 ---
 
 <style>
-    /* Estilos del Portafolio... */
+    /* ... (Los estilos del portafolio no cambian) ... */
 </style>
 
 <main>
     <section class="page-header" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/evento.jpg');" data-aos="fade-in">
-        <div class="container"><h1>Nuestro Trabajo</h1></div>
-    </section>
-    <section id="portfolio-page">
-        <div class="container">
-            <div class="portfolio-filters" data-aos="fade-up">
-                <button class="filter-btn active" data-filter="all">Todo</button>
-                <button class="filter-btn" data-filter="bodas">Bodas</button>
-                <button class="filter-btn" data-filter="quince">Quince Años</button>
-                <button class="filter-btn" data-filter="eventos">Eventos</button>
-                <button class="filter-btn" data-filter="producto">Producto</button>
-                <button class="filter-btn" data-filter="retrato">Retrato</button>
-            </div>
-            <div class="portfolio-gallery">
-                {% for item in pagination.items %}
-                <div class="portfolio-item" data-category="{{ item.data.category }}" data-aos="zoom-in">
-                    <img src="{{ item.data.image }}" alt="{{ item.data.title }}">
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-</main>
-<script>
-    // Script del Lightbox y Filtros...
-</script>
+        <div class="container"><h1>
