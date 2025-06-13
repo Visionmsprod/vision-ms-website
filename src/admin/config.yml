@@ -1,9 +1,9 @@
-backend:
+ackend:
   name: git-gateway
   branch: main
 
-media_folder: "src/images"
-public_folder: "/images"
+media_folder: "src/images" # Donde se guardarán las nuevas imágenes
+public_folder: "/images"  # Cómo se accederá a las imágenes desde la web
 
 collections:
   - name: "paginas"
@@ -15,43 +15,38 @@ collections:
         fields:
           - {label: "Título Principal", name: "titulo", widget: "string"}
           - {label: "Subtítulo", name: "subtitulo", widget: "string"}
-      - file: "src/_data/eventos.json"
-        label: "Página de Eventos"
-        name: "eventos"
-        fields:
-          - {label: "Título Principal", name: "titulo_principal", widget: "string"}
-          - {label: "Texto Introducción", name: "texto_filosofia", widget: "markdown"}
-      - file: "src/_data/sobre_nosotros.json"
-        label: "Página 'Sobre Nosotros'"
-        name: "sobre_nosotros"
-        fields:
-          - {label: "Cuerpo de la Historia", name: "historia_cuerpo", widget: "markdown"}
-          - name: "equipo"
-            label: "Miembros del Equipo"
-            widget: "list"
-            fields:
-              - {label: "Nombre", name: "nombre", widget: "string"}
-              - {label: "Cargo", name: "cargo", widget: "string"}
-              - {label: "Foto", name: "foto", widget: "image"}
+      # ... (Aquí irían las otras páginas si las hacemos editables)
 
   - name: "portafolio"
     label: "Portafolio"
-    folder: "src/portafolio" # La carpeta donde vivirán los archivos .md
+    folder: "src/portafolio" # Carpeta para guardar cada imagen como un archivo
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Título (para tu referencia)", name: "title", widget: "string"}
       - {label: "Imagen", name: "image", widget: "image"}
       - {label: "Categoría", name: "category", widget: "select", options: ["bodas", "quince", "eventos", "producto", "retrato"]}
-  
+
   - name: "servicios_cotizador"
     label: "Servicios del Cotizador"
-    folder: "src/servicios" # La carpeta para los servicios
+    folder: "src/servicios" # Carpeta para guardar cada servicio
     create: true
     slug: "{{slug}}"
     fields:
       - {label: "Nombre del Servicio", name: "title", widget: "string"}
-      - {label: "Sección (Ej: Bodas, Quince, etc.)", name: "seccion", widget: "string"}
-      - {label: "Tipo (Paquete o Adicional)", name: "tipo", widget: "string"}
-      - {label: "Descripción", name: "descripcion", widget: "string"}
-      - {label: "Precio (sólo números)", name: "precio", widget: "number"}
+      - {label: "Sección del Cotizador", name: "seccion", widget: "select", options: ["Bodas", "Quince Años", "Retratos", "Empresas", "Streaming", "Redes Sociales"]}
+      - {label: "Tipo (elige uno)", name: "tipo", widget: "select", options: ["Paquete Principal", "Adicional"]}
+      - {label: "Descripción Corta", name: "descripcion", widget: "string"}
+      - {label: "Precio (sólo el número)", name: "precio", widget: "number"}
+
+  - name: "configuracion"
+    label: "Configuración Global"
+    files:
+      - file: "src/_data/sitio.json"
+        label: "Datos de Contacto y Redes"
+        name: "sitio"
+        fields:
+          - {label: "Email de Contacto", name: "email", widget: "string"}
+          - {label: "Teléfono de Contacto", name: "telefono", widget: "string"}
+          - {label: "Enlace Instagram", name: "instagram_url", widget: "string"}
+          - {label: "Enlace YouTube", name: "youtube_url", widget: "string"}
