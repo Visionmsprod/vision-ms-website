@@ -15,12 +15,21 @@ collections:
         fields:
           - {label: "Título Principal", name: "titulo", widget: "string"}
           - {label: "Subtítulo", name: "subtitulo", widget: "string"}
+
       - file: "src/_data/eventos.json"
         label: "Página de Eventos"
         name: "eventos"
         fields:
           - {label: "Título Principal", name: "titulo_principal", widget: "string"}
           - {label: "Subtítulo", name: "subtitulo", widget: "string"}
+
+      - file: "src/_data/empresas.json"
+        label: "Página de Empresas"
+        name: "empresas"
+        fields:
+          - {label: "Título Principal", name: "titulo_principal", widget: "string"}
+          - {label: "Subtítulo", name: "subtitulo", widget: "string"}
+
       - file: "src/_data/sobre_nosotros.json"
         label: "Página 'Sobre Nosotros'"
         name: "sobre_nosotros"
