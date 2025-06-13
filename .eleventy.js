@@ -1,9 +1,14 @@
-const pluginRss = require("@11ty/eleventy-plugin-rss"); // <-- LÍNEA NUEVA
-
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addPlugin(pluginRss); // <-- LÍNEA NUEVA
 
-  // El resto de la configuración no cambia
+  // --- FILTRO PERSONALIZADO PARA EL COTIZADOR ---
+  eleventyConfig.addFilter("filterby", (collection, key, value) => {
+    if (!collection) {
+      return [];
+    }
+    return collection.filter(item => item.data[key] === value);
+  });
+
+  // --- COPIAR ARCHIVOS ESTÁTICOS ---
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/images");
@@ -13,6 +18,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/luisk.jpg");
   eleventyConfig.addPassthroughCopy("src/favicon.png");
 
+  // --- CONFIGURACIÓN DE ELEVENTY ---
   return {
     dir: {
       input: "src",
