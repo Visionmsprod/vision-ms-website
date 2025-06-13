@@ -1,51 +1,18 @@
 ---
 layout: "base.njk"
 title: "Portafolio"
-description: "Explora nuestro portafolio de fotografía y video."
+description: "Explora nuestro portafolio de fotografía y video. Bodas, quince años, retratos, eventos, fotografía de producto y corporativa."
 ---
 
 <style>
     .portfolio-filters { text-align: center; margin-bottom: 40px; }
-    .portfolio-filters button {
-        background: #e0e0e0;
-        color: #333;
-        border: none;
-        padding: 10px 20px;
-        margin: 5px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: background-color 0.3s;
-    }
+    .portfolio-filters button { background: #e0e0e0; color: #333; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer; font-weight: 600; transition: background-color 0.3s; }
     .portfolio-filters button:hover { background-color: #ccc; }
     .portfolio-filters button.active { background-color: var(--color-rojo-principal); color: white; }
-
-    .portfolio-gallery {
-        -webkit-column-count: 3;
-        -moz-column-count: 3;
-        column-count: 3;
-        -webkit-column-gap: 1em;
-        -moz-column-gap: 1em;
-        column-gap: 1em;
-    }
-    .portfolio-item {
-        display: inline-block;
-        margin: 0 0 1em;
-        width: 100%;
-        cursor: pointer;
-        overflow: hidden;
-        border-radius: 5px;
-    }
-    .portfolio-item img {
-        width: 100%;
-        height: auto;
-        display: block;
-        transition: transform 0.3s ease;
-    }
-    .portfolio-item:hover img {
-        transform: scale(1.05);
-    }
-    
+    .portfolio-gallery { column-count: 3; column-gap: 1em; }
+    .portfolio-item { display: inline-block; margin: 0 0 1em; width: 100%; cursor: pointer; overflow: hidden; border-radius: 5px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .portfolio-item:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .portfolio-item img { width: 100%; height: auto; display: block; }
     @media (max-width: 991px) { .portfolio-gallery { column-count: 2; } }
     @media (max-width: 768px) { .portfolio-gallery { column-count: 1; } }
 </style>
@@ -65,7 +32,6 @@ description: "Explora nuestro portafolio de fotografía y video."
                 <button class="filter-btn" data-filter="retrato">Retrato</button>
             </div>
             <div class="portfolio-gallery">
-                {# Este bucle ahora lee la colección 'portafolio' #}
                 {% for item in collections.portafolio %}
                 <div class="portfolio-item" data-category="{{ item.data.category }}" data-aos="zoom-in">
                     <img src="{{ item.data.image }}" alt="{{ item.data.title }}">
@@ -75,7 +41,3 @@ description: "Explora nuestro portafolio de fotografía y video."
         </div>
     </section>
 </main>
-
-<script>
-    // El script del lightbox y los filtros no cambia y se hereda de base.njk
-</script>
