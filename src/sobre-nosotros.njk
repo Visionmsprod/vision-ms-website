@@ -1,29 +1,49 @@
-<section id="historia">
-    <div class="container">
-        <div class="about-content">
-            <div data-aos="fade-right">
-                <img src="{{ sobre_nosotros.foto }}" alt="{{ sobre_nosotros.nombre }}">
-            </div>
-            <div data-aos="fade-left">
-                <h2>Nuestra Historia: De una Pasión a una Misión</h2>
-                {{ sobre_nosotros.historia | safe }}
+---
+layout: "base.njk"
+title: "Sobre Nosotros"
+description: "Conoce la historia y el equipo detrás de Visión MS Producción Audiovisual."
+---
+
+<style>
+    /* ... (los estilos específicos de esta página no cambian) ... */
+</style>
+
+<main>
+    <section class="page-header" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ sobre_nosotros.historia_foto }}');" data-aos="fade-in">
+        <div class="container">
+            <h1>{{ sobre_nosotros.titulo_principal }}</h1>
+        </div>
+    </section>
+
+    <section id="historia">
+        <div class="container">
+            <div class="about-content">
+                <div data-aos="fade-right">
+                    <img src="{{ sobre_nosotros.historia_foto }}" alt="Luis Carlos Mueses en acción">
+                </div>
+                <div data-aos="fade-left">
+                    <h2>{{ sobre_nosotros.historia_titulo }}</h2>
+                    {{ sobre_nosotros.historia_cuerpo | safe }}
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="equipo" style="background-color: var(--color-fondo-claro);">
-    <div class="container">
-        <h2 data-aos="fade-up">Conoce al Equipo</h2>
-        <div class="team-grid">
-            <div class="team-card" data-aos="zoom-in-up">
-                <img src="{{ sobre_nosotros.foto }}" alt="{{ sobre_nosotros.nombre }}">
-                <h3>{{ sobre_nosotros.nombre }}</h3>
-                <p class="title">{{ sobre_nosotros.cargo }}</p>
-                <p>"{{ sobre_nosotros.cita }}"</p>
+    <section id="equipo" style="background-color: var(--color-fondo-claro);">
+        <div class="container">
+            <h2 data-aos="fade-up">Conoce al Equipo</h2>
+            <div class="team-grid">
+                {% for miembro in sobre_nosotros.equipo %}
+                <div class="team-card" data-aos="zoom-in-up">
+                    <img src="{{ miembro.foto }}" alt="Foto de {{ miembro.nombre }}">
+                    <h3>{{ miembro.nombre }}</h3>
+                    <p class="title">{{ miembro.cargo }}</p>
+                    <p>"{{ miembro.cita }}"</p>
+                </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
-</section>
-
-<!-- ... Resto de la página ... -->
+    </section>
+    
+    <!-- ... Resto de la página ... -->
+</main>
