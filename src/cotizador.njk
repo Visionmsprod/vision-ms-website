@@ -8,37 +8,30 @@ description: "Calcula un presupuesto para tu proyecto."
 
 <main>
     <!-- ... (El page-header y menú de selección no cambian) ... -->
-    
     <form name="cotizacion_online" method="POST" data-netlify="true" id="calculator-form">
-        <!-- ... campos ocultos ... -->
-        <div class="calculator-wrapper">
-            <div class="services-list" data-aos="fade-right">
-
-                {% for seccion in ['Bodas', 'Quince Años', 'Retratos', 'Empresas', 'Streaming', 'Redes Sociales'] %}
-                <div class="calculator-section" id="cotizador-{{ seccion | lower | replace(' ', '-') }}">
-                    <h2>Cotizador de {{ seccion }}</h2>
-                    <h3>Paquetes Principales</h3>
-                    {% for item in collections.cotizador | filterby("seccion", seccion) | filterby("tipo", "Paquete Principal") %}
-                    <div class="service-item">
-                        <!-- ... estructura del item ... -->
-                        <label for="{{ item.fileSlug }}">{{ item.data.title }}</label>
-                        <!-- ... -->
-                        <div class="description">{{ item.data.descripcion }}</div>
-                    </div>
-                    {% endfor %}
-                    <h3>Adicionales</h3>
-                    {% for item in collections.cotizador | filterby("seccion", seccion) | filterby("tipo", "Adicional") %}
-                    <div class="service-item">
-                        <!-- ... estructura del item ... -->
-                    </div>
-                    {% endfor %}
+        <!-- ... -->
+        <div class="services-list">
+            {% set secciones = ["Bodas", "Quince Años", "Retratos", "Empresas", "Streaming", "Redes Sociales"] %}
+            {% for seccion in secciones %}
+            <div class="calculator-section" id="cotizador-{{ seccion | lower | replace(' ', '-') }}">
+                <h2>Cotizador de {{ seccion }}</h2>
+                <h3>Paquetes Principales</h3>
+                {% for item in collections.servicios_cotizador | filterby("seccion", seccion) | filterby("tipo", "Paquete Principal") %}
+                <div class="service-item">
+                    <!-- ... -->
+                    <label for="{{ item.fileSlug }}">{{ item.data.title }}</label>
+                    <div class="description">{{ item.data.descripcion }}</div>
                 </div>
                 {% endfor %}
-                
+                <h3>Adicionales</h3>
+                {% for item in collections.servicios_cotizador | filterby("seccion", seccion) | filterby("tipo", "Adicional") %}
+                <div class="service-item">
+                    <!-- ... -->
+                </div>
+                {% endfor %}
             </div>
-            <div class="summary" data-aos="fade-left">
-                <!-- ... contenido del resumen y formulario de contacto ... -->
-            </div>
+            {% endfor %}
         </div>
+        <!-- ... -->
     </form>
 </main>
