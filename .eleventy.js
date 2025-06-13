@@ -1,16 +1,11 @@
 module.exports = function(eleventyConfig) {
-  
+
   // --- FILTRO PERSONALIZADO PARA EL COTIZADOR ---
   eleventyConfig.addFilter("filterby", (collection, key, value) => {
-    if (!collection) {
-      return [];
-    }
+    if (!collection) return [];
     return collection.filter(item => {
-        const data = item.data;
-        if(data && data[key] !== undefined) {
-            return data[key] === value;
-        }
-        return false;
+      const data = item.data;
+      return data && data[key] !== undefined && data[key] === value;
     });
   });
 
@@ -20,13 +15,13 @@ module.exports = function(eleventyConfig) {
       return b.date - a.date;
     });
   });
-  
+
   // --- COPIAR ARCHIVOS ESTÁTICOS ---
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/images");
   eleventyConfig.addPassthroughCopy("src/admin");
-  eleventyConfig.addPassthroughCopy({"src/_redirects": "_redirects"});
+  eleventyConfig.addPassthroughCopy({ "src/_redirects": "_redirects" });
   eleventyConfig.addPassthroughCopy("src/logo1.png");
   eleventyConfig.addPassthroughCopy("src/luisk.jpg");
   eleventyConfig.addPassthroughCopy("src/favicon.png");
