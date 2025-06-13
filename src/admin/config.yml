@@ -54,5 +54,37 @@ collections:
               - {label: "Cargo", name: "cargo", widget: "string"}
               - {label: "Cita", name: "cita", widget: "string"}
               - {label: "Foto (pequeña y redonda)", name: "foto", widget: "image"}
+
+  - name: "portafolio"
+    label: "Portafolio"
+    folder: "src/portafolio"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Imagen", name: "image", widget: "image"}
+      - {label: "Categoría", name: "category", widget: "select", options: ["bodas", "quince", "eventos", "producto", "retrato"]}
   
-  # --- El resto de las colecciones (Portafolio, Cotizador, etc.) no cambian ---
+  - name: "cotizador"
+    label: "Servicios del Cotizador"
+    folder: "src/servicios"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nombre del Servicio", name: "title", widget: "string"}
+      - {label: "Sección del Cotizador", name: "seccion", widget: "select", options: ["Bodas", "Quince Años", "Retratos", "Empresas", "Streaming", "Redes Sociales"]}
+      - {label: "Tipo de Paquete", name: "tipo", widget: "select", options: ["Paquete Principal", "Adicional"]}
+      - {label: "Descripción Corta", name: "descripcion", widget: "string"}
+      - {label: "Precio (sólo números)", name: "precio", widget: "number"}
+
+  - name: "configuracion"
+    label: "Configuración Global"
+    files:
+      - file: "src/_data/sitio.json"
+        label: "Datos de Contacto y Redes"
+        name: "sitio"
+        fields:
+          - {label: "Email de Contacto", name: "email", widget: "string"}
+          - {label: "Teléfono de Contacto", name: "telefono", widget: "string"}
+          - {label: "Enlace Instagram", name: "instagram_url", widget: "string"}
+          - {label: "Enlace YouTube", name: "youtube_url", widget: "string"}
