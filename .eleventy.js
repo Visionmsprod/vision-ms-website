@@ -1,41 +1,32 @@
 module.exports = function(eleventyConfig) {
-
-  // --- FILTRO PERSONALIZADO PARA EL COTIZADOR ---
-  // Esta función le enseña a Eleventy qué significa "filterby"
-  eleventyConfig.addFilter("filterby", (collection, key, value) => {
-    if (!collection) {
-      return [];
-    }
-    return collection.filter(item => {
-        // Asegurarse de que el item y item.data existen
-        const data = item.data;
-        if(data && data[key] !== undefined) {
-            return data[key] === value;
-        }
-        return false;
-    });
-  });
-
-  // --- COPIAR ARCHIVOS ESTÁTICOS ---
-  // Le dice a Eleventy que copie estas carpetas y archivos a la carpeta final del sitio.
+  
+  // --- INSTRUCCIONES DE COPIADO (LA PARTE QUE FALTABA) ---
+  // Copia las carpetas completas de css, js, e images al sitio final.
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/images");
+  
+  // Copia la carpeta de administración
   eleventyConfig.addPassthroughCopy("src/admin");
-  eleventyConfig.addPassthroughCopy({"src/_redirects": "_redirects"});
+
+  // Copia archivos individuales que están en la raíz de 'src'
   eleventyConfig.addPassthroughCopy("src/logo1.png");
   eleventyConfig.addPassthroughCopy("src/luisk.jpg");
   eleventyConfig.addPassthroughCopy("src/favicon.png");
+  
+  // Copia el archivo de redirecciones a la raíz del sitio final
+  eleventyConfig.addPassthroughCopy({"src/_redirects": "_redirects"});
 
-  // --- CONFIGURACIÓN DE ELEVENTY ---
   return {
+    // --- CONFIGURACIÓN DE DIRECTORIOS ---
+    // Le dice a Eleventy dónde encontrar todo.
     dir: {
-      input: "src",
-      includes: "_includes",
-      data: "_data",
-      output: "_site"
+      input: "src",          // Carpeta principal de trabajo
+      includes: "_includes", // Carpeta para plantillas
+      data: "_data",         // Carpeta para archivos de datos
+      output: "_site"        // Carpeta donde se genera el sitio
     },
-    htmlTemplateEngine: "njk",
-    markdownTemplateEngine: "njk"
+    // Asegura que los archivos HTML se procesen como plantillas Nunjucks
+    htmlTemplateEngine: "njk"
   };
 };
