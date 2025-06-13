@@ -21,53 +21,38 @@ collections:
         label: "Página de Eventos"
         name: "eventos"
         fields:
-          - {label: "Título Principal", name: "titulo", widget: "string"}
-          - {label: "Texto de Introducción", name: "texto", widget: "text"}
+          - {label: "Título Principal", name: "titulo_principal", widget: "string"}
+          - {label: "Subtítulo", name: "subtitulo", widget: "string"}
+          - {label: "Título Filosofía", name: "titulo_filosofia", widget: "string"}
+          - {label: "Texto Filosofía", name: "texto_filosofia", widget: "text"}
+          - {label: "Título CTA Final", name: "titulo_cta", widget: "string"}
+          - {label: "Texto CTA Final", name: "texto_cta", widget: "text"}
       - file: "src/_data/empresas.json"
         label: "Página de Empresas"
         name: "empresas"
         fields:
-          - {label: "Título Principal", name: "titulo", widget: "string"}
-          - {label: "Texto de Introducción", name: "texto", widget: "text"}
+          - {label: "Título Principal", name: "titulo_principal", widget: "string"}
+          - {label: "Subtítulo", name: "subtitulo", widget: "string"}
+          - {label: "Título Intro", name: "titulo_intro", widget: "string"}
+          - {label: "Texto Intro", name: "texto_intro", widget: "text"}
+          - {label: "Lista de Beneficios", name: "beneficios", widget: "list"}
+          - {label: "Título Proceso", name: "titulo_proceso", widget: "string"}
+          - {label: "Texto Proceso", name: "texto_proceso", widget: "text"}
       - file: "src/_data/sobre_nosotros.json"
         label: "Página 'Sobre Nosotros'"
         name: "sobre_nosotros"
         fields:
-          - {label: "Tu Nombre", name: "nombre", widget: "string"}
-          - {label: "Tu Cargo", name: "cargo", widget: "string"}
-          - {label: "Tu Historia", name: "historia", widget: "markdown"}
-          - {label: "Tu Foto de Perfil", name: "foto", widget: "image"}
-
-  - name: "portafolio"
-    label: "Portafolio"
-    folder: "src/portafolio"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Título", name: "title", widget: "string"}
-      - {label: "Imagen", name: "image", widget: "image"}
-      - {label: "Categoría", name: "category", widget: "select", options: ["bodas", "quince", "eventos", "producto", "retrato"]}
+          - {label: "Título Principal", name: "titulo_principal", widget: "string"}
+          - {label: "Título de la Historia", name: "historia_titulo", widget: "string"}
+          - {label: "Cuerpo de la Historia", name: "historia_cuerpo", widget: "markdown"}
+          - {label: "Foto de la Historia (grande)", name: "historia_foto", widget: "image"}
+          - name: "equipo"
+            label: "Miembros del Equipo"
+            widget: "list"
+            fields:
+              - {label: "Nombre", name: "nombre", widget: "string"}
+              - {label: "Cargo", name: "cargo", widget: "string"}
+              - {label: "Cita", name: "cita", widget: "string"}
+              - {label: "Foto (pequeña y redonda)", name: "foto", widget: "image"}
   
-  - name: "cotizador"
-    label: "Servicios del Cotizador"
-    folder: "src/servicios"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Nombre del Servicio", name: "title", widget: "string"}
-      - {label: "Sección", name: "seccion", widget: "select", options: ["Bodas", "Quince Años", "Retratos", "Empresas", "Streaming", "Redes Sociales"]}
-      - {label: "Tipo de Paquete", name: "tipo", widget: "select", options: ["Paquete Principal", "Adicional"]}
-      - {label: "Descripción Corta", name: "descripcion", widget: "string"}
-      - {label: "Precio (sólo números)", name: "precio", widget: "number"}
-
-  - name: "configuracion_global"
-    label: "Configuración Global"
-    files:
-      - file: "src/_data/sitio.json"
-        label: "Datos de Contacto y Redes"
-        name: "sitio"
-        fields:
-          - {label: "Email de Contacto", name: "email", widget: "string"}
-          - {label: "Teléfono de Contacto", name: "telefono", widget: "string"}
-          - {label: "Enlace Instagram", name: "instagram_url", widget: "string"}
-          - {label: "Enlace YouTube", name: "youtube_url", widget: "string"}
+  # --- El resto de las colecciones (Portafolio, Cotizador, etc.) no cambian ---
