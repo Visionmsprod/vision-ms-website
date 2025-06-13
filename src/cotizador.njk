@@ -1,37 +1,48 @@
 ---
 layout: "base.njk"
 title: "Cotizador Online"
-description: "Calcula un presupuesto para tu proyecto."
 ---
 
-<!-- ... (El CSS del cotizador no cambia) ... -->
-
 <main>
-    <!-- ... (El page-header y menú de selección no cambian) ... -->
-    <form name="cotizacion_online" method="POST" data-netlify="true" id="calculator-form">
-        <!-- ... -->
-        <div class="services-list">
-            {% set secciones = ["Bodas", "Quince Años", "Retratos", "Empresas", "Streaming", "Redes Sociales"] %}
-            {% for seccion in secciones %}
-            <div class="calculator-section" id="cotizador-{{ seccion | lower | replace(' ', '-') }}">
-                <h2>Cotizador de {{ seccion }}</h2>
-                <h3>Paquetes Principales</h3>
-                {% for item in collections.servicios_cotizador | filterby("seccion", seccion) | filterby("tipo", "Paquete Principal") %}
-                <div class="service-item">
-                    <!-- ... -->
-                    <label for="{{ item.fileSlug }}">{{ item.data.title }}</label>
-                    <div class="description">{{ item.data.descripcion }}</div>
+    <section class="page-header" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/corporativ.jpg');">
+        <div class="container"><h1>Cotizador Online</h1></div>
+    </section>
+    <section id="calculator">
+        <div class="container">
+            <div class="text-center">
+                <h2>Paso 1: Selecciona el Tipo de Servicio</h2>
+                <div class="service-selection-menu">
+                    <button class="btn active" data-target="cotizador-bodas">Bodas</button>
+                    <!-- ... otros botones ... -->
                 </div>
-                {% endfor %}
-                <h3>Adicionales</h3>
-                {% for item in collections.servicios_cotizador | filterby("seccion", seccion) | filterby("tipo", "Adicional") %}
-                <div class="service-item">
-                    <!-- ... -->
-                </div>
-                {% endfor %}
             </div>
-            {% endfor %}
+            <form name="cotizacion_online" method="POST" data-netlify="true" id="calculator-form">
+                <div class="calculator-wrapper">
+                    <div class="services-list">
+                        {% set secciones = ["Bodas", "Quince Años", "Retratos", "Empresas", "Streaming", "Redes Sociales"] %}
+                        {% for seccion in secciones %}
+                        <div class="calculator-section" id="cotizador-{{ seccion | lower | replace(' ', '-') }}">
+                            <h2>Cotizador de {{ seccion }}</h2>
+                            <h3>Paquetes Principales</h3>
+                            {% for item in collections.servicios_cotizador | filterby("seccion", seccion) | filterby("tipo", "Paquete Principal") %}
+                            <div class="service-item">
+                                <!-- ... Contenido del item ... -->
+                            </div>
+                            {% endfor %}
+                            <h3>Adicionales</h3>
+                            {% for item in collections.servicios_cotizador | filterby("seccion", seccion) | filterby("tipo", "Adicional") %}
+                            <div class="service-item">
+                                <!-- ... Contenido del item ... -->
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="summary">
+                        <!-- ... Resumen y formulario de contacto ... -->
+                    </div>
+                </div>
+            </form>
         </div>
-        <!-- ... -->
-    </form>
+    </section>
 </main>
