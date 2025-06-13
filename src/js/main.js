@@ -1,16 +1,9 @@
-// Inicializar AOS (Animate On Scroll)
-AOS.init({ duration: 800, once: true });
+// --- SCRIPT GENERAL PARA TODAS LAS PÁGINAS ---
 
-// Lógica del Preloader
-const preloader = document.getElementById('preloader');
-window.addEventListener('load', () => {
-    if (preloader) {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 500);
-    }
-});
+// Inicializar AOS (Animate On Scroll)
+if (typeof AOS !== 'undefined') {
+    AOS.init({ duration: 800, once: true });
+}
 
 // Lógica del Menú Móvil
 const menuToggle = document.querySelector('.menu-toggle');
@@ -23,7 +16,8 @@ if (menuToggle && mainNav) {
     });
 }
 
-// Lógica del Cotizador (si existe en la página)
+
+// --- LÓGICA ESPECÍFICA PARA EL COTIZADOR ---
 const calculatorForm = document.getElementById('calculator-form');
 if (calculatorForm) {
     const allCalculatorInputs = calculatorForm.querySelectorAll('input[type="checkbox"], input[type="radio"]');
@@ -34,7 +28,7 @@ if (calculatorForm) {
     const calculatorSections = document.querySelectorAll('.calculator-section');
     const formatter = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
 
-    function calculateTotal() {
+    const calculateTotal = () => {
         let currentTotal = 0;
         const activeSection = document.querySelector('.calculator-section.active');
         if (activeSection) {
@@ -42,17 +36,19 @@ if (calculatorForm) {
                 currentTotal += parseFloat(input.dataset.price);
             });
         }
-        totalDisplay.textContent = formatter.format(currentTotal);
-        totalInput.value = formatter.format(currentTotal);
-    }
+        if (totalDisplay && totalInput) {
+            totalDisplay.textContent = formatter.format(currentTotal);
+            totalInput.value = formatter.format(currentTotal);
+        }
+    };
 
-    function toggleDescription(input) {
+    const toggleDescription = (input) => {
         const item = input.closest('.service-item');
         const description = item.querySelector('.description');
         if (description) {
             description.style.display = input.checked ? 'block' : 'none';
         }
-    }
+    };
 
     selectionButtons.forEach(button => {
         button.addEventListener('click', (e) => {
@@ -61,8 +57,16 @@ if (calculatorForm) {
             selectionButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
             calculatorSections.forEach(section => section.classList.remove('active'));
-            document.getElementById(targetId).classList.add('active');
-            serviceTypeInput.value = button.textContent;
+            
+            const targetSection = document.getElementById(targetId);
+            if(targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            if(serviceTypeInput) {
+                serviceTypeInput.value = button.textContent;
+            }
+
             allCalculatorInputs.forEach(input => {
                 input.checked = false;
                 const desc = input.closest('.service-item').querySelector('.description');
@@ -86,10 +90,14 @@ if (calculatorForm) {
         });
     });
     
-    // Activar la primera sección al cargar
+    // Activar la primera sección al cargar la página del cotizador
     const initiallyActiveButton = document.querySelector('.service-selection-menu .btn.active');
-    if(initiallyActiveButton) {
-        document.getElementById(initiallyActiveButton.dataset.target).classList.add('active');
+    if (initiallyActiveButton) {
+        const initialTarget = initiallyActiveButton.dataset.target;
+        const initialSection = document.getElementById(initialTarget);
+        if(initialSection) {
+             initialSection.classList.add('active');
+        }
     }
     calculateTotal();
 }
