@@ -1,13 +1,23 @@
 module.exports = function(eleventyConfig) {
-  // Definir explícitamente la colección del portafolio
-  eleventyConfig.addCollection("portafolio", function(collectionApi) {
-    return collectionApi.getFilteredByTag("portafolio").sort(function(a, b) {
-      // Ordena por el nombre del archivo, puedes cambiarlo después
-      return a.inputPath.localeCompare(b.inputPath);
+
+  // --- FILTRO PERSONALIZADO PARA EL COTIZADOR ---
+  // Esta función le enseña a Eleventy qué significa "filterby"
+  eleventyConfig.addFilter("filterby", (collection, key, value) => {
+    if (!collection) {
+      return [];
+    }
+    return collection.filter(item => {
+        // Asegurarse de que el item y item.data existen
+        const data = item.data;
+        if(data && data[key] !== undefined) {
+            return data[key] === value;
+        }
+        return false;
     });
   });
 
-  // El resto de la configuración permanece igual
+  // --- COPIAR ARCHIVOS ESTÁTICOS ---
+  // Le dice a Eleventy que copie estas carpetas y archivos a la carpeta final del sitio.
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/images");
@@ -17,6 +27,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/luisk.jpg");
   eleventyConfig.addPassthroughCopy("src/favicon.png");
 
+  // --- CONFIGURACIÓN DE ELEVENTY ---
   return {
     dir: {
       input: "src",
@@ -24,6 +35,7 @@ module.exports = function(eleventyConfig) {
       data: "_data",
       output: "_site"
     },
-    htmlTemplateEngine: "njk"
+    htmlTemplateEngine: "njk",
+    markdownTemplateEngine: "njk"
   };
 };
