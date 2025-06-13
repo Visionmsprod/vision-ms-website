@@ -1,145 +1,22 @@
 ---
 layout: "base.njk"
 title: "Soluciones para Empresas"
-description: "Producción de video y fotografía corporativa, de producto y aérea. Aumenta el impacto de tu marca con contenido profesional."
 ---
 
-<style>
-.intro-text ul {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 20px;
-  text-align: left;
-  display: inline-block;
-}
-.intro-text ul li {
-  font-weight: 600;
-  padding: 5px 0;
-}
-.intro-text ul li::before {
-  content: '✓';
-  color: var(--color-rojo-principal);
-  margin-right: 10px;
-  font-weight: bold;
-}
-#cta-cotizador.text-center {
-  background-color: var(--color-fondo-claro);
-  color: var(--color-texto-oscuro);
-}
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
-}
-.gallery-grid img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-.process-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  text-align: center;
-}
-.process-step {
-  padding: 20px;
-  border-radius: 12px;
-  background-color: var(--color-fondo-claro);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-</style>
-
 <main>
-
-<!-- ENCABEZADO -->
-<section class="page-header" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/empresa-01.jpg');" data-aos="fade-in">
-  <div class="container">
-    <h1>{{ empresas.titulo_principal }}</h1>
-    <p>{{ empresas.subtitulo }}</p>
-  </div>
-</section>
-
-<!-- INTRO + BENEFICIOS + VIDEO -->
-<section id="intro" class="text-center">
-  <div class="container" data-aos="fade-up">
-    <h2>{{ empresas.titulo_intro }}</h2>
-    <div class="intro-text">
-      <p>{{ empresas.texto_intro }}</p>
-      <ul>
-        {% for beneficio in empresas.beneficios %}
-          <li>{{ beneficio }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="video-container" data-aos="zoom-in-up">
-      <iframe src="{{ empresas.video_url }}" title="Video Corporativo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<!-- GALERÍA CORPORATIVA -->
-<section id="servicios-empresa" style="background-color: var(--color-fondo-claro);">
-  <div class="container text-center" data-aos="fade-up">
-    <h2>Fotografía Corporativa</h2>
-    <div class="gallery-grid">
-      <img src="/images/empresa.jpg" alt="Corporativo 1">
-      <img src="/images/corporativ.jpg" alt="Corporativo 2">
-    </div>
-  </div>
-</section>
-
-<!-- PROCESO -->
-<section id="proceso">
-  <div class="container text-center" data-aos="fade-up">
-    <h2>{{ empresas.titulo_proceso }}</h2>
-    <p style="margin-bottom: 60px;">{{ empresas.texto_proceso }}</p>
-    <div class="process-grid">
-      {% for paso in empresas.proceso %}
-        <div class="process-step">{{ paso }}</div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- LLAMADO A LA ACCIÓN -->
-<section id="cta-cotizador" class="text-center">
-  <div class="container" data-aos="zoom-in">
-    <h2>¿Tienes un proyecto en mente?</h2>
-    <p>Usa nuestro cotizador online para configurar un paquete de servicios y recibir una propuesta formal.</p>
-    <a href="/cotizador/" class="btn" style="margin-top: 20px;">Solicitar Propuesta</a>
-  </div>
-</section>
-
+    <section class="page-header" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/empresa-01.jpg');">
+        <div class="container">
+            <h1>{{ empresas.titulo_principal }}</h1>
+            <p>{{ empresas.subtitulo }}</p>
+        </div>
+    </section>
+    <section id="servicios-empresa" style="background-color: var(--color-fondo-claro);">
+        <div class="container text-center">
+            <h3>Fotografía Corporativa</h3>
+            <div class="gallery-grid">
+                <img src="/images/empresa.jpg" alt="Corporativo 1">
+                <img src="/images/corporativ.jpg" alt="Corporativo 2">
+            </div>
+        </div>
+    </section>
 </main>
-        <div class="video-container" data-aos="zoom-in-up">
-            <iframe src="https://www.youtube.com/embed/j0oz7MHCsLM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-    </div>
-</section>
-
-<section id="servicios-empresa" style="background-color: var(--color-fondo-claro);">
-    <div class="container text-center" data-aos="fade-up">
-        <h2>Nuestras Soluciones para tu Negocio</h2>
-        <!-- ... galerías y resto del contenido ... -->
-    </div>
-</section>
-
-<section id="proceso">
-    <div class="container text-center" data-aos="fade-up">
-        <h2>{{ empresas.titulo_proceso }}</h2>
-        <p style="margin-bottom: 60px;">{{ empresas.texto_proceso }}</p>
-        <div class="process-grid">
-            <!-- ... los 4 pasos del proceso ... -->
-        </div>
-    </div>
-</section>
-
-<section id="cta-cotizador" class="text-center">
-    <div class="container" data-aos="zoom-in">
-        <h2>¿Tienes un proyecto en mente?</h2>
-        <p>Usa nuestro cotizador online para configurar un paquete de servicios y recibir una propuesta formal.</p>
-        <a href="/cotizador/" class="btn" style="margin-top: 20px;">Solicitar Propuesta</a>
-    </div>
-</section>
