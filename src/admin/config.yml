@@ -7,7 +7,7 @@ public_folder: "/images"
 
 collections:
   - name: "paginas"
-    label: "Contenido de Páginas"
+    label: "Páginas Principales"
     files:
       - file: "src/_data/homepage.json"
         label: "Página de Inicio"
@@ -17,13 +17,54 @@ collections:
           - {label: "Subtítulo", name: "subtitulo", widget: "string"}
           - {label: "Título de Introducción", name: "intro_titulo", widget: "string"}
           - {label: "Texto de Introducción", name: "intro_texto", widget: "text"}
-      # Aquí añadiremos las otras páginas como 'sobre_nosotros.json', etc.
+      - file: "src/_data/eventos.json"
+        label: "Página de Eventos"
+        name: "eventos"
+        fields:
+          - {label: "Título Principal", name: "titulo", widget: "string"}
+          - {label: "Texto de Introducción", name: "texto", widget: "text"}
+      - file: "src/_data/empresas.json"
+        label: "Página de Empresas"
+        name: "empresas"
+        fields:
+          - {label: "Título Principal", name: "titulo", widget: "string"}
+          - {label: "Texto de Introducción", name: "texto", widget: "text"}
+      - file: "src/_data/sobre_nosotros.json"
+        label: "Página 'Sobre Nosotros'"
+        name: "sobre_nosotros"
+        fields:
+          - {label: "Tu Nombre", name: "nombre", widget: "string"}
+          - {label: "Tu Cargo", name: "cargo", widget: "string"}
+          - {label: "Tu Historia", name: "historia", widget: "markdown"}
+          - {label: "Tu Foto de Perfil", name: "foto", widget: "image"}
 
-  - name: "configuracion"
+  - name: "portafolio"
+    label: "Portafolio"
+    folder: "src/portafolio"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Imagen", name: "image", widget: "image"}
+      - {label: "Categoría", name: "category", widget: "select", options: ["bodas", "quince", "eventos", "producto", "retrato"]}
+  
+  - name: "cotizador"
+    label: "Servicios del Cotizador"
+    folder: "src/servicios"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nombre del Servicio", name: "title", widget: "string"}
+      - {label: "Sección", name: "seccion", widget: "select", options: ["Bodas", "Quince Años", "Retratos", "Empresas", "Streaming", "Redes Sociales"]}
+      - {label: "Tipo de Paquete", name: "tipo", widget: "select", options: ["Paquete Principal", "Adicional"]}
+      - {label: "Descripción Corta", name: "descripcion", widget: "string"}
+      - {label: "Precio (sólo números)", name: "precio", widget: "number"}
+
+  - name: "configuracion_global"
     label: "Configuración Global"
     files:
       - file: "src/_data/sitio.json"
-        label: "Datos de Contacto"
+        label: "Datos de Contacto y Redes"
         name: "sitio"
         fields:
           - {label: "Email de Contacto", name: "email", widget: "string"}
